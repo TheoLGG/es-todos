@@ -3,7 +3,7 @@ export default function Todo(page, data) {
     const constructor = document.createElement('div');
     constructor.innerHTML = `
     <div class="card">
-      
+     LOL
     </div>
   `;
 
