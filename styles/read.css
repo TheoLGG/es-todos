@@ -1,0 +1,86 @@
+.view {
+  position: relative;
+  margin-bottom: 12px;
+  min-height: 100%;
+  background-color: var(--app-card-color);
+  margin: -0.25rem -0.5rem;
+}
+.view a {
+  display: block;
+  text-decoration: none;
+}
+
+.view figure {
+  position: relative;
+  min-height: 38vh;
+  padding: 0;
+  margin: 0;
+  background-color: hsla(0, 0%, 15%, 0.64);
+}
+.view img {
+  display: block;
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+  max-height: 40vh;
+}
+.view .placeholder {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.view main {
+  height: 100%;
+  padding: 1rem;
+  background-color: var(--app-card-color);
+}
+.view main h1 {
+  font-size: 1.6rem;
+  margin: 0;
+  padding: 1rem 0;
+}
+.view main p {
+  font-size: 1.3rem;
+}
+/**
+  * Persist animation using : animation-fill-mode set to forward 
+  * @see https://developer.mozilla.org/en-US/docs/Web/CSS/animation-fill-mode
+  */
+.fade {
+  -webkit-animation: fadeout 2s forwards; /* Safari and Chrome */
+  -moz-animation: fadeout 2s forwards; /* Firefox */
+  -ms-animation: fadeout 2s forwards; /* Internet Explorer */
+  -o-animation: fadeout 2s forwards; /* Opera */
+  animation: fadeout 2s forwards;
+}
+
+/* Key frame animation */
+@keyframes fadeout {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* Firefox */
+@-moz-keyframes fadeout {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* Safari and Chrome */
+@-webkit-keyframes fadeout {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* Wide layout: when the viewport width is bigger than 460px, layout
+changes to a wide layout. */
+@media (min-width: 460px) {
+  .view main {
+    padding: 0 10%;
+  }
+}

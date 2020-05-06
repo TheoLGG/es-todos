@@ -61,6 +61,7 @@ function changeConnectivity(state) {
 
 function timeoutFallback(threshold) {
   setTimeout(() => {
+    console.log(abortFallback)
     if (!abortFallback) {
       // console.log('Connectivity is too slow, falling back to offline mode :(');
       changeConnectivity(false);
