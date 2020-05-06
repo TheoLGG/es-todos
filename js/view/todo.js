@@ -81,7 +81,7 @@ let dataToSave = [];
 
             createTodo(data).then(() => {
                 let chril = card.querySelector('.todolist').cloneNode(true)
-                chril.innerHTML = data.name;
+                chril.innerHTML = "<span class='pb-10'>" + data.name + " - " + data.content + `  <a class='button shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded' href="/todo/${data.id}" >Link</a>` + "</span> <hr class='pt-4 pb-5'>";
                 card.appendChild(chril);
 
             })
@@ -91,7 +91,7 @@ let dataToSave = [];
             setTodo(data).then(() => {
                 dataToSave.push(data);
                 let chril = card.querySelector('.todolist').cloneNode(true)
-                chril.innerHTML = data.name;
+                chril.innerHTML = "<span class='pb-10'>" + data.name + " - " + data.content + `  <a class='button shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded' href="/todo/${data.id}" >Link</a>` + "</span> <hr class='pt-4 pb-5'>";
                 card.appendChild(chril);
             })
         }
@@ -123,7 +123,7 @@ let dataToSave = [];
         getTodos().then(result=>{
             result.map(data=>{
                 let chril = card.querySelector('.todolist').cloneNode(true)
-                chril.innerHTML = data.name;
+                chril.innerHTML = "<span class='pb-10'>" + data.name + " - " + data.content + `  <a class='button shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded' href="/todo/${data.id}" >Link</a>` + "</span> <hr class='pt-4 pb-5'>";
                 card.appendChild(chril);
             })
         })
