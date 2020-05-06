@@ -21,10 +21,8 @@ import checkConnectivity from './network.js';
     document.offline = !e.detail;
     if (e.detail) {
       root.style.setProperty('--app-blue', '#007eef');
-      // console.log('Back online');
     } else {
       root.style.setProperty('--app-blue', '#7D7D7D');
-      // console.log('Connection too slow');
     }
   });
   

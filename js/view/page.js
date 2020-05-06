@@ -44,8 +44,6 @@ export default function Page(page, id) {
   `;
 
 
-
-
     let dataToSave = [];
 
     const card = constructor

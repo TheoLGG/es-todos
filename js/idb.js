@@ -3,12 +3,9 @@ import { openDB } from 'idb';
 export async function initDB() {
     const db = await openDB('awesome-todo',  1, {
         upgrade(db) {
-            // Create a store of objects
             const store = db.createObjectStore('todos', {
-                // The 'id' property of the object will be the key.
                 keyPath: 'id',
             });
-            // Create an index on the 'date' property of the objects.
             store.createIndex('synced', 'synced');
             store.createIndex('updated', 'updated');
             store.createIndex('done', 'done');
