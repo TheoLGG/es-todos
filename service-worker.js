@@ -5,7 +5,7 @@ const excludeFromCache = [
   'http://localhost:8081/data/spacex.json'
 ];
 
-const cacheVersion = 'v6';
+const cacheVersion = 'v7';
 
 self.addEventListener('install', function(event) {
   event.waitUntil(
@@ -16,9 +16,11 @@ self.addEventListener('install', function(event) {
           '/index.html',
           '/js/app.js',
           '/js/view/home.js',
-          '/js/view/read.js',
-          '/style/card.css',
-          '/style/read.css',
+          '/js/view/todo.js',
+          '/js/api/todo.js',
+          '/js/idb.js',
+          '/js/network.js',
+          '/style/tailwind.css',
         ])
       })
   );

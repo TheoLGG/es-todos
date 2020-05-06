@@ -44,13 +44,7 @@ import checkConnectivity from './network.js';
   });
   
   if (!document.offline) {
-    const result = await fetch('/data/spacex.json');
-    const clonedResult = result.clone();
-    const json = await result.json();
-    database.put('articles', json, 'articles');
-    // caches.open('runtime-caching').then(cache => {
-    //   cache.put('/data/spacex.json', clonedResult);
-    // });
+
   }
 
   //TODO CHANGE ARTICLES BY CONNECTIVITY
@@ -80,6 +74,18 @@ import checkConnectivity from './network.js';
     const docTitle = document.head.querySelector('title');
     document.title = `Todo list`;
     Todo(homeCtn, data);
+
+    pages.forEach(page => page.removeAttribute('active'));
+    homeCtn.setAttribute('active', true);
+  });
+
+
+  page('/todo/:id', async (ctx) => {
+    const module = await import('./view/page.js');
+    const Page = module.default;
+    const docTitle = document.head.querySelector('title');
+    document.title = `Todo list`;
+    Page(homeCtn, ctx.params.id);
 
     pages.forEach(page => page.removeAttribute('active'));
     homeCtn.setAttribute('active', true);

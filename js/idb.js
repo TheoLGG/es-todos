@@ -1,8 +1,7 @@
 import { openDB } from 'idb';
 
 export async function initDB() {
-    const config = window.config;
-    const db = await openDB('awesome-todo', config.version || 1, {
+    const db = await openDB('awesome-todo',  1, {
         upgrade(db) {
             // Create a store of objects
             const store = db.createObjectStore('todos', {
@@ -39,3 +38,5 @@ export async function getTodos() {
     const db = await initDB();
     return await db.getAll('todos');
 }
+
+
