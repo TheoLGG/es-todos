@@ -1,6 +1,7 @@
 import {fetchTodos} from "../api/todo.js";
 import {createTodo} from "../api/todo.js";
 import {setTodos, getTodos, setTodo} from "../idb.js";
+import {deleteById} from "../api/todo";
 
 export default function Todo(page, data) {
     page.innerHTML = '';
@@ -62,28 +63,24 @@ export default function Todo(page, data) {
   `;
 
 
-
-
 let dataToSave = [];
 
     const card = constructor
         .querySelector('.card')
         .cloneNode(true);
 
-
-    var el = card.querySelector('.button');
+        var el = card.querySelector('.button');
     el.addEventListener("click", () => {
         let name = card.querySelector('#name').value;
         let content = card.querySelector('#content').value;
 
         if(!document.offline) {
             let data = {name: name, content: content}
-
             createTodo(data).then(() => {
                 let chril = card.querySelector('.todolist').cloneNode(true)
-                chril.innerHTML = "<span class='pb-10'>" + data.name + " - " + data.content + `  <a class='button shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded' href="/todo/${data.id}" >Link</a>` + "</span> <hr class='pt-4 pb-5'>";
+                chril.innerHTML = "<span class='pb-10'>" + data.name + " - " + data.content + `  <a class='button shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline mr-2 focus:outline-none text-white font-bold py-2 px-4 rounded' href="/todo/${data.id}" >Link</a><a class='button shadow bg-orange-500 hover:bg-orange-300 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded' href="/todo/modify/${data.id}" >Modify</a>
+  ` + "</span>  <hr class='pt-4 pb-5'>";
                 card.appendChild(chril);
-
             })
         }else{
             let data = {id: Date.now(),name: name, content: content}
@@ -91,7 +88,8 @@ let dataToSave = [];
             setTodo(data).then(() => {
                 dataToSave.push(data);
                 let chril = card.querySelector('.todolist').cloneNode(true)
-                chril.innerHTML = "<span class='pb-10'>" + data.name + " - " + data.content + `  <a class='button shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded' href="/todo/${data.id}" >Link</a>` + "</span> <hr class='pt-4 pb-5'>";
+                chril.innerHTML = "<span class='pb-10'>" + data.name + " - " + data.content + `  <a class='button shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline mr-2 focus:outline-none text-white font-bold py-2 px-4 rounded' href="/todo/${data.id}" >Link</a><a class='button shadow bg-orange-500 hover:bg-orange-300 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded' href="/todo/modify/${data.id}" >Modify</a>
+ ` + "</span>  <hr class='pt-4 pb-5'>";
                 card.appendChild(chril);
             })
         }
@@ -114,21 +112,28 @@ let dataToSave = [];
                 setTodos(result)
                 result.map(data=>{
                     let chril = card.querySelector('.todolist').cloneNode(true)
-                    chril.innerHTML = "<span class='pb-10'>" + data.name + " - " + data.content + `  <a class='button shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded' href="/todo/${data.id}" >Link</a>` + "</span> <hr class='pt-4 pb-5'>";
-                    card.appendChild(chril);
+                    chril.innerHTML ="<span class='pb-10'>" + data.name + " - " + data.content + `  <a class='button shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline mr-2 focus:outline-none text-white font-bold py-2 px-4 rounded' href="/todo/${data.id}" >Link</a><a class='button shadow bg-orange-500 hover:bg-orange-300 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded' href="/todo/modify/${data.id}" >Modify</a>
+` + "</span>  <hr class='pt-4 pb-5'>";
+                        card.appendChild(chril);
                 })
+
             }
     )
     }else{
         getTodos().then(result=>{
             result.map(data=>{
                 let chril = card.querySelector('.todolist').cloneNode(true)
-                chril.innerHTML = "<span class='pb-10'>" + data.name + " - " + data.content + `  <a class='button shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded' href="/todo/${data.id}" >Link</a>` + "</span> <hr class='pt-4 pb-5'>";
-                card.appendChild(chril);
+                chril.innerHTML = "<span class='pb-10'>" + data.name + " - " + data.content + `  <a class='button shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline mr-2 focus:outline-none text-white font-bold py-2 px-4 rounded' href="/todo/${data.id}" >Link</a><a class='button shadow bg-orange-500 hover:bg-orange-300 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded' href="/todo/modify/${data.id}" >Modify</a>
+` + "</span>  <hr class='pt-4 pb-5'>";
+                    card.appendChild(chril);
             })
         })
     }
 
-    page.appendChild(card);
+
+
+
+
+    page.appendChild(card)
     return card;
 };

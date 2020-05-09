@@ -35,30 +35,31 @@
   <meta name="description" content="Get all the information you doesn't know you wanted !">
   <script>
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
+      window.addEventListener('load', async () => {
         let refreshing = false;
-        let newWorker = null;
+        // return false;
         navigator.serviceWorker.register('/service-worker.js', {
           scope: '/'
-        }).then(function(registration) {
+        }).then(registration => {
           setInterval(() => {
-            console.log('Checking for new service workder');
+            console.log('Checking for new service worker');
             registration.update();
-          }, 10 * 1000);
+          }, 10*1000);
 
           if (registration.waiting && navigator.serviceWorker.controller) {
-            newWorker = registration.waiting;
-            const response = confirm('A new version of your application is awaiable, would you like to update ?');
-            if (response) newWorker.postMessage({ type: 'SKIP_WAITING' });
+            document.newWorker = registration.waiting;
+            const response = confirm('A new version of your application is available, would you like to update ?');
+            if (response) document.newWorker.postMessage({ type: 'SKIP_WAITING' });
           }
 
           registration.addEventListener('updatefound', () => {
-            console.log('Service Worker update detected');
-            newWorker = registration.installing;
-            newWorker.addEventListener('statechange', () => {
-              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+            console.log('Service Worker update detected!');
+            document.newWorker = registration.installing;
+
+            document.newWorker.addEventListener('statechange', () => {
+              if (document.newWorker.state === 'installed' && navigator.serviceWorker.controller) {
                 const response = confirm('A new version of your application is available, would you like to update ?');
-                if (response) newWorker.postMessage({ type: 'SKIP_WAITING' });
+                if (response) document.newWorker.postMessage({ type: 'SKIP_WAITING' });
               }
             })
           });
@@ -71,7 +72,7 @@
         });
       });
     } else {
-      console.log('Service worker not supported !!!!!!!!');
+      console.log("Sorry you browser doesn't support service worker");
     }
   </script>
 </head>

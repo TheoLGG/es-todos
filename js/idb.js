@@ -36,4 +36,17 @@ export async function getTodos() {
     return await db.getAll('todos');
 }
 
+export async function deleteTodo(id,name){
+    const db = await initDB();
+return await db.delete(name,id);
+}
 
+
+export async function updateTodo(item) {
+    const db = await initDB();
+    const tx = db.transaction('todos', 'readwrite').objectStore('todos');
+    const objectStore = await tx.get(parseInt(item.id));
+    objectStore.title = item.name;
+    objectStore.content = item.content;
+    return await tx.put(objectStore);
+}

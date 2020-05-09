@@ -89,5 +89,17 @@ import checkConnectivity from './network.js';
     homeCtn.setAttribute('active', true);
   });
 
+
+  page('/todo/modify/:id', async (ctx) => {
+    const module = await import('./view/modify.js');
+    const Modify = module.default;
+    const docTitle = document.head.querySelector('title');
+    document.title = `Todo list`;
+    Modify(homeCtn, ctx.params.id);
+
+    pages.forEach(page => page.removeAttribute('active'));
+    homeCtn.setAttribute('active', true);
+  });
+
   page();
 })();
